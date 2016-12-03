@@ -7,6 +7,29 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
+
+require 'faker'
+
 #Clear out the database
 Product.destroy_all
 Comment.destroy_all
+
+
+12.times {
+  Product.create({
+  name: Faker::Commerce.product_name,
+  description: Faker::Hipster.paragraphs(3).join(' '),
+  imageURL: Faker::Internet.url
+ })
+}
+
+products = Product.all
+
+products.each { |product|
+  3.times {
+    product.comments.create({
+      author: Faker::Name.name,
+      body: Faker::Hipster.paragraphs(3).join(' ')
+      })
+    }
+}
