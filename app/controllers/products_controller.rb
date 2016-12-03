@@ -1,11 +1,11 @@
 class ProductsController < ApplicationController
 
-def index
+  def index
     @products = Product.all
     respond_to do |format|
       format.json {render json: @products}
     end
-end
+  end
 
 def show
   @product = Product.find(params[:id])
@@ -14,15 +14,25 @@ def show
   end
 end
 
-  def new
+def new
   @product = Product.new
 end
 
-  def edit
+def edit
+  @product = Product.find(params[:id])
+end
+
+def update
+  @product =  Product.find(params[:id])
 end
 
 def create
   @product = Product.new(product_params)
+  respond_to do |format|
+    if @product.save!
+      format.json {render json: @product, status: :created, location: @product}
+    end
+  end
 end
 
 def destroy
@@ -34,11 +44,8 @@ end
 
 
 private
-  def set_product
-    @product = Product.find(params[:id])
-  end
 
 def product_params
-  params.require(:product).permit(:name, :description)
+  params.require(:product).permit(:name, :description, :imageURL)
   end
 end
