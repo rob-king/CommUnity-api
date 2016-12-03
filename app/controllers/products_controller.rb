@@ -2,11 +2,16 @@ class ProductsController < ApplicationController
 
 def index
     @products = Product.all
+    respond_to do |format|
+      format.json {render json: @products}
+    end
 end
 
 def show
-  @product = Product.find(params[:product_id])
-  @comment = Comment.find(params[:id])
+  @product = Product.find(params[:id])
+  respond_to do |format|
+    format.json {render json: @product}
+  end
 end
 
   def new
@@ -25,6 +30,7 @@ def destroy
   respond_to do |format|
     format.html { redirect_to product_url, notice: 'Product was successfully destroyed. ' }
   end
+end
 
 
 private
@@ -35,5 +41,4 @@ private
 def product_params
   params.require(:product).permit(:name, :description)
   end
-end
 end
