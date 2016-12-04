@@ -5,52 +5,45 @@ class ProductsController < ApplicationController
     render :json => @products
   end
 
-def show
-  @product = Product.find(params[:id])
-  respond_to do |format|
-    format.json {render json: @product, include: :comments}
+  def show
+    @product = Product.find(params[:id])
+    render json: @product, include: :comments
   end
-end
 
-def new
-  @product = Product.new
-end
+  def new
+    @product = Product.new
+  end
 
-def edit
-  @product = Product.find(params[:id])
-end
+  def edit
+    @product = Product.find(params[:id])
+  end
 
-def update
-  @product =  Product.find(params[:id])
-  respond_to do |format|
+  def update
+    @product =  Product.find(params[:id])
     if @product.update!(product_params)
-      format.json {render json: @product, location: @product}
+      render json: @product, location: @product
     else
-      format.json {render json: @product.errors, status: :unprocessable_entity}
+      render json: @product.errors, status: :unprocessable_entity
     end
   end
-end
 
-def create
-  @product = Product.new(product_params)
-  respond_to do |format|
+  def create
+    @product = Product.new(product_params)
     if @product.save!
-      format.json {render json: @product, status: :created, location: @product}
+      render json: @product, status: :created, location: @product
     else
-      format.json {render json: @product.errors, status: :unprocessable_entity}
+      render json: @product.errors, status: :unprocessable_entity
     end
   end
-end
 
-def destroy
-  @product =  Product.find(params[:id])
-  @product.destroy
-end
+  def destroy
+    @product =  Product.find(params[:id])
+    @product.destroy
+  end
 
+  private
 
-private
-
-def product_params
-  params.require(:product).permit(:name, :description, :imageURL)
+  def product_params
+    params.require(:product).permit(:name, :description, :imageURL)
   end
 end
