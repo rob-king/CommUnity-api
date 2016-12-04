@@ -19,7 +19,7 @@ Comment.destroy_all
   Product.create({
   name: Faker::Commerce.product_name,
   description: Faker::Hipster.paragraphs(3).join(' '),
-  imageURL: Faker::Internet.url
+  imageURL: Faker::Avatar.image
  })
 }
 
