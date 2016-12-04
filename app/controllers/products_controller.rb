@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
 def show
   @product = Product.find(params[:id])
   respond_to do |format|
-    format.json {render json: @product}
+    format.json {render json: @product, include: :comments}
   end
 end
 
@@ -24,6 +24,13 @@ end
 
 def update
   @product =  Product.find(params[:id])
+  respond_to do |format|
+    if @product.update!(product_params)
+      format.json {render json: @product, location: @product}
+    else
+      format.json {render json: @product.errors, status: :unprocessable_entity}
+    end
+  end
 end
 
 def create
@@ -31,15 +38,15 @@ def create
   respond_to do |format|
     if @product.save!
       format.json {render json: @product, status: :created, location: @product}
+    else
+      format.json {render json: @product.errors, status: :unprocessable_entity}
     end
   end
 end
 
 def destroy
+  @product =  Product.find(params[:id])
   @product.destroy
-  respond_to do |format|
-    format.html { redirect_to product_url, notice: 'Product was successfully destroyed. ' }
-  end
 end
 
 
