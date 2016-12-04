@@ -1,3 +1,5 @@
 class Comment < ApplicationRecord
   belongs_to :product
-end
+  validates :body, presence: true
+  validates :author , presence: true
+  validates :body, length: { maximum: 100}
