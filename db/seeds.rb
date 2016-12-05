@@ -26,7 +26,7 @@ Comment.destroy_all
 products = Product.all
 
 products.each { |product|
-  3.times {
+  rand(3..7).times {
     product.comments.create({
       author: Faker::Name.name,
       body: Faker::Hipster.paragraphs(3).join(' ')
