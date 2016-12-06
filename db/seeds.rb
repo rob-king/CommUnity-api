@@ -13,13 +13,23 @@ require 'faker'
 #Clear out the database
 Product.destroy_all
 Comment.destroy_all
+Category.destroy_all
+
+categories =  ["app", "health", "finance", "learning", "poverty", "data", "map"]
+
+
+
+categories.each { |category|
+  Category.create(name: category)
+}
 
 
 12.times {
   Product.create({
   name: Faker::Commerce.product_name,
   description: Faker::Hipster.paragraphs(3).join(' '),
-  imageURL: Faker::Avatar.image
+  imageURL: Faker::Avatar.image,
+  votes: rand(1..100)
  })
 }
 
@@ -32,4 +42,10 @@ products.each { |product|
       body: Faker::Hipster.paragraphs(3).join(' ')
       })
     }
+
+  rand(3..5).times {
+    category = Category.find_by(name: categories.sample)
+    product.tags.create(category:category) unless product.categories.pluck(:id).include? category.id
+  }
+
 }
