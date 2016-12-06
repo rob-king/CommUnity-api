@@ -31,6 +31,7 @@ class ProductsController < ApplicationController
   def destroy
     @product =  Product.find(params[:id])
     @product.destroy
+    render nothing: true, status: :ok
   end
 
   private
