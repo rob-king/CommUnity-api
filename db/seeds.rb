@@ -45,7 +45,9 @@ count = 0
   name: Faker::Commerce.product_name,
   description: Faker::Hipster.paragraphs(3).join(' '),
   imageURL: images[count],
-  votes: rand(1..100)
+  votes: rand(1..100),
+  author: Faker::Name.name,
+  authorAvatar: Faker::Avatar.image
  })
  count += 1
 }
