@@ -6,4 +6,5 @@ Rails.application.routes.draw do
     post '/tags', to: 'tags#create'
     put '/tags', to: 'tags#update'
   end
+  get '/categories', to: 'categories#index'
 end
