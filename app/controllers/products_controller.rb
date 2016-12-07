@@ -2,18 +2,18 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
-    render json: @products, include: :comments
+    render json: @products, include: [:comments, :categories]
   end
 
   def show
     @product = Product.find(params[:id])
-    render json: @product, include: :comments
+    render json: @product, include: [:comments, :categories]
   end
 
   def update
     @product =  Product.find(params[:id])
     if @product.update!(product_params)
-      render json: @product, location: @product, include: :comments
+      render json: @product, location: @product, include: [:comments, :categories]
     else
       render json: @product.errors, status: :unprocessable_entity
     end
@@ -31,6 +31,7 @@ class ProductsController < ApplicationController
   def destroy
     @product =  Product.find(params[:id])
     @product.destroy
+    render nothing: true, status: :ok
   end
 
   private
