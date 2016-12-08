@@ -1,13 +1,13 @@
-# CommUnity (Pasakhom)- Back-End 
+# CommUnity (Pasakhom)- Back-End
 
 A CommUnity app built for GA WDI Group Project 3
 
 ## Introduction:
   - CommUnity is a application that contains a listing of user submitted product ideas that contribute to the  social  
     good of others.
-  - The app consisted of 2 models.
+  - The app consisted of 4 models.
 
-  - Restful routes for both models.
+  - Restful routes for all models.
 
 ## User Stories:  
   - The app functionality: Users can view listing of products.
@@ -27,8 +27,12 @@ A CommUnity app built for GA WDI Group Project 3
 
   - Postman
 
+  - RSpec Rails
+
 ## Future Improvement:
 
   - Work on adding more features
 
   - Add more styling
+
+  - Add users
