@@ -1,24 +1,34 @@
-# README
+# CommUnity (Pasakhom)- Back-End Rails Framework
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A CommUnity app built for GA WDI Group Project 3
 
-Things you may want to cover:
+## Introduction:
+  - CommUnity is a application that contains a listing of user submitted product ideas that contribute to the  social  
+    good of others.
+  - The app consisted of 2 models.
 
-* Ruby version
+  - Restful routes for both models.
 
-* System dependencies
+## User Stories:  
+  - The app functionality: Users can view listing of products.
 
-* Configuration
+  - Ability to see product details.
 
-* Database creation
+  - Ability to comment and tag products.
 
-* Database initialization
 
-* How to run the test suite
+## Technologies Used:
 
-* Services (job queues, cache servers, search engines, etc.)
+  - Ruby 2.3.1p112
 
-* Deployment instructions
+  - Postgresql
 
-* ...
+  - Rails version 5.0.0.1
+
+  - Postman
+
+## Future Improvement:
+
+  - Work on adding more features
+
+  - Add more styling
