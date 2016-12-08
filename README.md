@@ -1,4 +1,4 @@
-# CommUnity (Pasakhom)- Back-End Rails Framework
+# CommUnity (Pasakhom)- Back-End 
 
 A CommUnity app built for GA WDI Group Project 3
 
