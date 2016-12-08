@@ -25,9 +25,10 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    @product = Product.find(params[:product_id])
     @comment = Comment.find(params[:id])
     @comment.destroy
-    render json: @comment.product, include: [:comments, :categories]
+    render json: @product, include: [:comments, :categories]
 
   end
 
