@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     @comment = @product.comments.new(comment_params)
 
     if @comment.save!
-      render json: @product, include: :comments,  status: :created, location: @product
+      render json: @product, include: [:comments, :categories],  status: :created, location: @product
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
     @comment.product = @product
 
     if @comment.update!(comment_params)
-      render json: @product, include: :comments
+      render json: @product, include: [:comments, :categories]
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
@@ -27,6 +27,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment = Comment.find(params[:id])
     @comment.destroy
+    render json: @comment.product, include: [:comments, :categories]
 
   end
 
