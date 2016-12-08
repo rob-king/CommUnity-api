@@ -12,28 +12,29 @@ class Product < ApplicationRecord
     tags_to_remove = current_tags - tags_list
 
     tags_to_add.each {|tag|
-      create_tag self, tag.downcase
+      create_tag tag.downcase
     }
 
     tags_to_remove.each{ |tag|
-      remove_tag self, tag.downcase
+      remove_tag tag.downcase
     }
+    self.reload
   end
 
   private
 
-  def create_tag(product, tag_string)
+  def create_tag(tag_string)
     category = Category.find_by(name: tag_string)
     if category
-      product.tags.create(category: category) unless product.categories.pluck(:name).include? tag_string
+      self.tags.create(category: category) unless self.categories.pluck(:name).include? tag_string
     else
-      product.categories.create(name: tag_string)
+      self.categories.create(name: tag_string)
     end
   end
 
-  def remove_tag(product, tag_string)
+  def remove_tag(tag_string)
     category = Category.find_by(name: tag_string)
-    tag = Tag.find_by(product: product, category: category)
+    tag = Tag.find_by(product: self, category: category)
     tag.destroy
   end
 end
